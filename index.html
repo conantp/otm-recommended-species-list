@@ -1,0 +1,561 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Asheville Tree Map: Recommend Species List</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <style type='text/css'>
+    body{
+      font-family: 'Myriad Set Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-body{
+      padding: 0 15px;
+    }
+
+    #users > h1{
+
+      text-align: center;
+      margin: 0;
+      padding: 10px 15px 10px 15px;
+      background: #3FC380;
+      font-size: 1.5em;
+      color: white;
+      box-shadow: -1px 1px 5px rgba(0,0,0,0.8);
+    }
+
+
+
+    #users > h2{
+      text-align: center;
+      font-size: 1.1em;
+      padding: 0 15px;
+      margin-bottom: 0;
+    }
+
+    h3{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+      select{
+        width: 46%;
+        margin-right: 4%;
+        margin-bottom: 10px;
+        margin-left: 0;
+        
+      }  
+
+    .list-filter-reset{
+      color: blue;
+      text-decoration: underline;
+      margin-left: 20px;
+      display: inline-block;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .botanical_name {
+      font-weight: bold;
+    }
+
+    .notes {
+      max-height: 100px;
+      overflow: scroll;
+      display: block;
+    }
+
+    table {
+      padding: 10px;
+      width: 100%;
+      background: white;
+      /* gray */
+    }
+
+    th {
+      text-align: center;
+    }
+
+    tr {}
+
+    td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+
+    input {
+      border: solid 1px #ccc;
+      border-radius: 5px;
+      padding: 7px 14px;
+      margin-bottom: 10px
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #aaa;
+    }
+
+    .sort {
+      color: black;
+      cursor: pointer;
+    }
+
+
+    /*
+    .sort {
+      margin-bottom: 10px;
+      padding: 8px 30px;
+      border-radius: 6px;
+      border: none;
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      background-color: #28a8e0;
+      height: 30px;
+    }*/
+
+    .sort:hover {
+      text-decoration: none;
+      /* background-color: #1b8aba; */
+    }
+
+    .sort:focus {
+      outline: none;
+    }
+
+    .sort:after {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      content: "";
+      position: relative;
+      top: -10px;
+      right: -5px;
+    }
+
+    .sort.asc:after {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid blue;
+      content: "";
+      position: relative;
+      top: 13px;
+      right: -5px;
+    }
+
+    .sort.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid blue;
+      content: "";
+      position: relative;
+      top: -10px;
+      right: -5px;
+    }
+
+    .mobile-details{
+        display: none;
+      }
+      
+      .mobile-label{
+        display: none;
+      }
+
+    .no-results-message{
+      display: none;
+      padding: 20px;
+      background: #3FC380;
+      color: white;
+      margin: 0 -15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    @media (max-width: 700px) {
+      
+    .mobile-details{
+        clear: left;
+            width: 45%;
+            margin-bottom: 10px;
+
+    }
+
+    .mobile-data{
+      width: 40%;
+      float: left;
+    }
+      .mobile-label{
+        display: inline-block;
+        margin-right: 10px;
+        color: #333;
+        font-weight: bold;
+      }
+
+
+      
+      
+      #filter-container{
+        width: 100%;
+        margin-bottom: 0;
+        display: none;
+        padding-bottom: 10px;
+      }
+      
+      .search{
+        display: block;
+        width: 100%;
+                margin-bottom: 0;
+
+      }
+      
+
+      .thead{
+        display: none;
+      }
+
+       table{
+        display: block;
+        width: 95%;
+      }
+      .row{
+        display: block;
+        border-bottom: 2px solid #3FC380;
+        position: relative;
+        overflow: hidden;
+        padding:  10px;
+        padding-bottom: 10px;
+        font-size: 0.9em;
+        /*box-shadow: 0px 1px 2px rgba(0,0,0,0.8);*/
+        margin-bottom: 0px;
+      }
+      
+      .row > div{
+        display: none;
+        border: none;
+        float: left;
+      
+      }
+
+      .filter-expand{
+        color: #3FC380;
+        cursor: pointer;
+
+      }
+      
+      .row-header{
+        color: #3FC380;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 5px;
+      }
+      
+      .botanical_name{
+        width: 65%;
+      }
+
+      .expanded .botanical_name{
+        width: auto;
+      }
+
+      .type{
+        width: 30%;
+        text-align: right;
+      }
+
+      .expanded .type{
+        text-align: left;
+      }
+      
+       .row > .botanical_name, .row > .type{
+        display: block;
+      }
+      
+      .type{
+      }
+      
+      
+      
+      .notes{
+        display: none;
+        max-height: 400px;
+      }
+
+      /* PRC NEW */
+      .expand-button{
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 1.2em;
+      }
+
+      .type{
+        /*margin-left: 30px;*/
+        /*font-weight: lighter;*/
+      }
+
+      #treelist-table{
+        margin: 0 -15px;
+        margin-top: 15px;
+        border-top: 4px solid #3FC380;
+      }
+    }
+  </style>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>    
+  <script type="text/javascript" src="https://raw.githubusercontent.com/jsoma/tabletop/master/src/tabletop.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+  <script type='text/javascript'>
+  // make an HTML table using tabletop.js
+
+  // this seems not to work in jsFiddle
+
+  var AVLTRMP = {};
+  AVLTRMP.active_filters = {};
+  AVLTRMP.exclude_from_filters = ['Botanical Name', 'Common Name', 'Notes'];
+  AVLTRMP.option_full_data = {}; 
+  AVLTRMP.userList = false;
+  AVLTRMP.debug = true; 
+  AVLTRMP.target_sheet = 'Botanical Name Sort';
+  AVLTRMP.list_options = { valueNames: [] };
+  AVLTRMP.public_spreadsheet_url = '1i2Cw38GWd5Q0yx-lpZdwgpYOwwvkv5O8CLvNrmop9VY';
+
+  AVLTRMP.init = function(){
+      Tabletop.init({
+        key: AVLTRMP.public_spreadsheet_url,
+        callback: AVLTRMP.showInfo,
+        simpleSheet: false
+      });
+  };
+
+
+
+  AVLTRMP.showInfo = function(data) {
+
+    var target_sheet_data = data[AVLTRMP.target_sheet];
+
+    var sort_html = "";
+    
+    sort_html += "<div class='thead'>";
+    for (header_index in target_sheet_data.column_names) {
+      var header = target_sheet_data.column_names[header_index];
+
+      AVLTRMP.list_options.valueNames.push(header);
+      AVLTRMP.option_full_data[header] = [];
+
+      sort_html += "<div class='sort' data-sort='" + header + "'>";
+        sort_html += header;
+      sort_html += "</div>";
+    }
+    sort_html += "</div>";
+    
+    document.getElementById("treelist-header").innerHTML = sort_html;
+
+    var html = "";
+
+    for (row_index in target_sheet_data.elements) {
+      row = target_sheet_data.elements[row_index];
+      html += "<div class='row'>";
+      // html += "<div class='row-header'>";
+      html += "<h1 class='row-header'>" + row["Common Name"] + "<i class=\"expand-button fa fa-caret-down\" aria-hidden=\"true\"></i></h1>";
+      // html += "</div>";
+      i = 0;
+      for (col_index in row) {
+        var clean_class = col_index.toLowerCase().replace(" ", "_");
+        col = row[col_index];
+        
+        html += "<div class='mobile-details'><span class='mobile-label'>";
+        html += target_sheet_data.column_names[i] + ": ";
+        html += "</span></div>";
+        i++;
+        
+        html += "<div class='mobile-data " + col_index + " " + clean_class + "'>";
+       
+
+
+        html += col;
+        html += "</div>";
+          
+        
+
+        if (AVLTRMP.option_full_data[col_index].indexOf(col) == -1) {
+          AVLTRMP.option_full_data[col_index].push(col);
+        }
+      }
+      
+      html += "<div class='mobile-details'> </div>";
+      
+      html += "</div>";
+    }
+    
+    document.getElementById("treelist-content").innerHTML = html;
+
+    AVLTRMP.buildFilterLists();
+    AVLTRMP.userList = new List('users', AVLTRMP.list_options);
+    if(AVLTRMP.debug){
+      console.log(AVLTRMP);
+    }
+  };
+
+  AVLTRMP.buildFilterLists = function() {
+    var filter_html = "";
+
+    for (option_index in AVLTRMP.option_full_data) {
+      if (AVLTRMP.exclude_from_filters.indexOf(option_index) != -1) {
+        continue;
+      }
+      option = AVLTRMP.option_full_data[option_index];
+      
+      filter_html += "<select class='list-filter' data-attribute='" + option_index + "'>";
+      filter_html += "<option value=''><strong>" + option_index + "...</strong></option>";
+
+      for (index in option.sort() ) {
+        value = option[index];
+        filter_html += "<option value='" + value + "'>" + value + "</option>";
+      }
+      filter_html += "</select>";
+    }
+
+    document.getElementById("filter-container").innerHTML += filter_html;
+  }
+
+  AVLTRMP.filterList = function() {
+    elm = $(this);
+    
+    active_attribute = $(this).attr('data-attribute');
+    active_value = $(this).val();
+
+    if (!active_value) {
+      delete AVLTRMP.active_filters[active_attribute];
+    } else {
+      AVLTRMP.active_filters[active_attribute] = active_value;
+    }
+    
+    if(AVLTRMP.debug){
+      console.log(AVLTRMP.active_filters);
+    }
+    
+    if (! $.isEmptyObject(AVLTRMP.active_filters) ){
+      AVLTRMP.userList.filter(AVLTRMP.runListFilter);
+      for(key in AVLTRMP.active_filters){
+        $("div." + key).show();
+      }
+    } else {
+      AVLTRMP.userList.filter();
+    }
+    
+   console.log("TESTING: ", $('.row').length)
+    if($('.row').length <= 1){
+      $(".no-results-message").slideDown();
+    }
+    else{
+        $(".no-results-message").slideUp();
+    }
+  };
+
+  AVLTRMP.runListFilter = function(item) {
+    var result = false;
+    for (attribute in AVLTRMP.active_filters) {
+      target_value = AVLTRMP.active_filters[attribute];
+      if (item.values()[attribute] == target_value) {
+        result = true;
+      } else {
+        return false; // no need to keep checking if they missed a match
+      }
+    }
+    return result;
+  };
+
+  AVLTRMP.resetFilters = function(){
+    $(".list-filter").val('');
+    AVLTRMP.active_filters = {};
+    AVLTRMP.userList.filter();
+    $(".no-results-message").slideUp();
+
+  };
+
+  AVLTRMP.showFilters = function(){
+    $('.filter-expand').toggleClass('fa-caret-down').toggleClass('fa-caret-up');
+    $(".filter-container").slideToggle();
+  };
+
+  AVLTRMP.showTreeRow = function(){
+  //  $(this).find('.mobile-details').slideToggle();
+
+    if($(this).hasClass('expanded')){
+      $(this).find('div.slide-target').slideUp();
+      $(this).removeClass('expanded');
+      $(this).find('.expand-button').addClass('fa-caret-down').removeClass('fa-caret-up');
+    }
+    else{
+      $(this).find('div:hidden').addClass('slide-target').slideDown();
+      $(this).addClass('expanded');
+      $(this).find('.expand-button').addClass('fa-caret-up').removeClass('fa-caret-down');
+
+    }
+  };
+
+  $(function() {
+    $(document).on('change', '.list-filter', AVLTRMP.filterList);
+    $(document).on('click', '.list-filter-reset', AVLTRMP.resetFilters);
+    $(document).on('click', '.row', AVLTRMP.showTreeRow);
+    $(document).on('click', '.filter-expand', AVLTRMP.showFilters);
+
+    
+    // window.onload = function() { AVLTRMP.init() };
+    AVLTRMP.init();
+  });
+
+  </script>
+
+</head>
+<body>
+  <div id="users">
+    <h1>
+      Asheville Tree Map
+    </h1>
+    <h2>
+      Recommended Species List
+    </h2>
+    <div class='page-body'>
+      <div id='search-container'>
+        <h3>
+          <span class='filter-expand'>Filter <i class="expand-button fa fa-caret-down" aria-hidden="true"></i></span>
+          <span class='list-filter-reset'>reset</span>
+        </h3>
+        <div id='filter-container' class='filter-container'></div>
+      </div>
+      <div>
+        <input class="search" placeholder="Search" />
+      </div>
+      <div id="treelist-table">
+        <div id='treelist-header'>
+        </div>
+        <div id='treelist-content' class="list">
+        </div>
+      </div>
+  <!--     <table id="treelist-table">
+        <thead id='treelist-header'>
+        </thead>
+        <tbody id='treelist-content' class="list">
+        </tbody>
+      </table> -->
+      <div class='no-results-message'>
+        No results found.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
